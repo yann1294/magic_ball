@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 
@@ -11,6 +13,18 @@ class MagicBallPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.blue,
+        title: Text(
+            'Magic Ball',
+          style: TextStyle(
+            color: Colors.white,
+            fontFamily: 'Pacifico-Regular',
+            fontSize: 20.0
+          ),
+        ),
+      ),
+      backgroundColor: Colors.lightBlue,
       body: BallPage(),
     );
   }
@@ -25,6 +39,15 @@ class BallPage extends StatefulWidget {
 }
 
 class _BallPageState extends State {
+
+  int ballNumber = 1;
+
+  void shufflingBall(){
+
+    setState(() {
+      ballNumber = Random().nextInt(5) + 1;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -33,10 +56,15 @@ class _BallPageState extends State {
         children: <Widget>[
           Expanded(
             child: FlatButton(
-              onPressed: (){},
+              onPressed: (){
+                shufflingBall();
+                print('Ball pressed');
+              },
               child: Image.asset(
-                'images/ball1.png'
-              ),),),
+                'images/ball$ballNumber.png'
+              ),
+            ),
+          ),
         ],
       ),
     );
